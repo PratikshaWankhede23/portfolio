@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pratiksha Mane — Senior Cloud Infrastructure &amp; Implementation Consultant</title>
+<meta name="description" content="Pratiksha Mane — Triple AWS-Certified Lead Cloud Consultant specializing in AWS, Azure, DevOps automation and Polarion ALM delivery for global enterprise clients.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F6F8;
+    --surface:#FFFFFF;
+    --surface-alt:#EDF2F5;
+    --ink:#0F1B2D;
+    --ink-soft:#37455A;
+    --muted:#6B7A8A;
+    --line:#DCE3E9;
+    --line-strong:#C4CFD8;
+    --accent:#0E8F68;
+    --accent-ink:#085B41;
+    --accent-soft:#E1F3EC;
+    --azure:#2F6FED;
+    --azure-soft:#E8EFFE;
+    --amber:#B9720F;
+    --amber-soft:#FBF0DF;
+    --radius:10px;
+    --mono:'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --display:'Space Grotesk', 'Inter', sans-serif;
+    --body:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --maxw:1120px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+  h1,h2,h3,h4{font-family:var(--display); margin:0; letter-spacing:-0.01em;}
+  p{margin:0;}
+  ul{margin:0; padding:0; list-style:none;}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--azure);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  /* ---------- background route lines ---------- */
+  .route-bg{
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    opacity:0.5;
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    background:rgba(244,246,248,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:var(--mono); font-weight:600; font-size:14px;
+    text-decoration:none; color:var(--ink);
+  }
+  .brand .mark{
+    width:30px; height:30px; border-radius:7px;
+    background:var(--ink); color:var(--bg);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--display); font-weight:700; font-size:13px;
+  }
+  .status-pill{
+    display:flex; align-items:center; gap:7px;
+    font-family:var(--mono); font-size:12px; color:var(--accent-ink);
+    background:var(--accent-soft); border:1px solid #C7E7DA;
+    padding:5px 10px 5px 8px; border-radius:100px;
+  }
+  .dot{
+    width:7px; height:7px; border-radius:50%; background:var(--accent);
+    box-shadow:0 0 0 0 rgba(14,143,104,0.5);
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(14,143,104,0.45);}
+    70%{box-shadow:0 0 0 7px rgba(14,143,104,0);}
+    100%{box-shadow:0 0 0 0 rgba(14,143,104,0);}
+  }
+  nav.primary-nav{display:flex; gap:2px;}
+  nav.primary-nav a{
+    font-family:var(--mono); font-size:12.5px; color:var(--muted);
+    text-decoration:none; padding:8px 12px; border-radius:6px;
+  }
+  nav.primary-nav a:hover{color:var(--ink); background:var(--surface-alt);}
+  .nav-toggle{display:none;}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative; z-index:1; padding:76px 0 64px;}
+  .hero-grid{
+    display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:start;
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:0.04em;
+    color:var(--azure); text-transform:uppercase; display:block; margin-bottom:16px;
+  }
+  .hero h1{
+    font-size:clamp(34px, 4.4vw, 54px);
+    line-height:1.05;
+    font-weight:700;
+    color:var(--ink);
+  }
+  .hero h1 span{color:var(--accent-ink);}
+  .hero .role{
+    font-family:var(--body); font-weight:500; font-size:19px; color:var(--ink-soft);
+    margin-top:16px; max-width:46ch;
+  }
+  .hero .desc{
+    margin-top:20px; color:var(--muted); font-size:15.5px; max-width:54ch;
+  }
+  .hero-cta{display:flex; gap:12px; margin-top:32px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:13px; font-weight:500;
+    padding:12px 18px; border-radius:8px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px;
+    border:1px solid transparent; transition:transform .15s ease, background .15s ease;
+  }
+  .btn-primary{background:var(--ink); color:var(--bg);}
+  .btn-primary:hover{transform:translateY(-1px); background:#1c2c42;}
+  .btn-ghost{background:transparent; color:var(--ink); border-color:var(--line-strong);}
+  .btn-ghost:hover{background:var(--surface-alt);}
+
+  .hero-meta{
+    display:flex; gap:22px; margin-top:36px; flex-wrap:wrap;
+  }
+  .hero-meta div{font-family:var(--mono); font-size:12px; color:var(--muted);}
+  .hero-meta strong{display:block; font-family:var(--display); font-size:20px; color:var(--ink); font-weight:700;}
+
+  /* status board (signature element) */
+  .status-board{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    box-shadow:0 1px 2px rgba(15,27,45,0.04), 0 12px 32px -18px rgba(15,27,45,0.18);
+    overflow:hidden;
+  }
+  .status-board-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 18px; border-bottom:1px solid var(--line); background:var(--surface-alt);
+  }
+  .status-board-head .title{font-family:var(--mono); font-size:12px; color:var(--ink-soft); font-weight:500;}
+  .traffic{display:flex; gap:6px;}
+  .traffic span{width:8px; height:8px; border-radius:50%; background:var(--line-strong);}
+  .status-board-body{padding:20px 18px 8px;}
+  .metric-row{
+    display:flex; align-items:baseline; justify-content:space-between;
+    padding:13px 0; border-bottom:1px dashed var(--line);
+  }
+  .metric-row:last-child{border-bottom:none;}
+  .metric-label{font-family:var(--mono); font-size:12.5px; color:var(--muted);}
+  .metric-value{font-family:var(--display); font-size:22px; font-weight:700; color:var(--ink);}
+  .metric-value.good{color:var(--accent-ink);}
+  .status-board-foot{
+    padding:14px 18px; background:var(--surface-alt); border-top:1px solid var(--line);
+    display:flex; align-items:center; gap:8px;
+  }
+  .status-board-foot p{font-family:var(--mono); font-size:11.5px; color:var(--muted);}
+
+  /* ---------- sections common ---------- */
+  section{position:relative; z-index:1; padding:64px 0;}
+  .section-head{margin-bottom:36px; max-width:64ch;}
+  .section-head .eyebrow{margin-bottom:10px;}
+  .section-head h2{font-size:clamp(24px,3vw,32px); font-weight:700;}
+  .section-head p.lede{margin-top:12px; color:var(--muted); font-size:15px;}
+  .divider{height:1px; background:var(--line); border:none; margin:0;}
+
+  /* about */
+  .about-body p{color:var(--ink-soft); font-size:16px; max-width:72ch; margin-bottom:16px;}
+  .about-body p:last-child{margin-bottom:0;}
+
+  /* expertise */
+  .expertise-grid{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:16px;
+  }
+  .expertise-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px;
+  }
+  .expertise-card .head{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+  .expertise-card h3{font-size:16px; font-weight:600;}
+  .expertise-card .idx{font-family:var(--mono); font-size:11px; color:var(--muted);}
+  .tag-list{display:flex; flex-wrap:wrap; gap:6px;}
+  .tag{
+    font-family:var(--mono); font-size:11.5px; color:var(--ink-soft);
+    background:var(--surface-alt); border:1px solid var(--line);
+    padding:4px 9px; border-radius:6px;
+  }
+
+  /* metrics grid */
+  .metrics-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .metric-tile{background:var(--surface); padding:24px 20px;}
+  .metric-tile .num{font-family:var(--display); font-size:30px; font-weight:700; color:var(--accent-ink);}
+  .metric-tile .lbl{font-family:var(--mono); font-size:11.5px; color:var(--muted); margin-top:8px; display:block;}
+
+  /* experience / deployment log */
+  .log{border-left:2px solid var(--line); margin-left:6px;}
+  .log-role{
+    padding:0 0 28px 26px; position:relative;
+  }
+  .log-role::before{
+    content:""; position:absolute; left:-7px; top:4px;
+    width:12px; height:12px; border-radius:50%;
+    background:var(--surface); border:2px solid var(--accent);
+  }
+  .log-role .role-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px; margin-bottom:4px;}
+  .log-role h3{font-size:19px; font-weight:700;}
+  .log-role .company{font-family:var(--mono); font-size:12.5px; color:var(--azure);}
+  .log-role .period{font-family:var(--mono); font-size:12px; color:var(--muted); margin-left:auto;}
+  .log-entries{margin-top:16px; display:grid; gap:10px;}
+  .log-entry{
+    display:grid; grid-template-columns:100px 1fr; gap:14px;
+    padding:12px 14px; background:var(--surface); border:1px solid var(--line); border-radius:8px;
+  }
+  .log-entry .tag-key{font-family:var(--mono); font-size:11px; color:var(--azure); font-weight:600; text-transform:uppercase; letter-spacing:.02em;}
+  .log-entry p{font-size:14px; color:var(--ink-soft);}
+
+  /* certifications */
+  .cert-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;}
+  .cert-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:20px; display:flex; gap:14px; align-items:flex-start;
+  }
+  .cert-badge{
+    width:38px; height:38px; border-radius:8px; flex:none;
+    background:var(--amber-soft); color:var(--amber);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--mono); font-weight:700; font-size:13px;
+    border:1px solid #EFD9AE;
+  }
+  .cert-card h3{font-size:14.5px; font-weight:600; line-height:1.35;}
+
+  /* education */
+  .edu-card{
+    display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap;
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px;
+  }
+  .edu-card h3{font-size:17px; font-weight:700;}
+  .edu-card .school{font-family:var(--mono); font-size:12.5px; color:var(--muted); margin-top:6px; display:block;}
+  .edu-card .cgpa{font-family:var(--mono); font-size:13px; color:var(--accent-ink); background:var(--accent-soft); padding:6px 12px; border-radius:100px; align-self:center; border:1px solid #C7E7DA;}
+
+  /* contact */
+  .contact-panel{
+    background:var(--ink); color:#EDF2F5; border-radius:16px; padding:44px;
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px;
+  }
+  .contact-panel h2{color:#fff; font-size:clamp(24px,3vw,30px);}
+  .contact-panel .eyebrow{color:#7FB8FF;}
+  .contact-panel p.lede{color:#AEB9C6; margin-top:12px; max-width:44ch;}
+  .contact-list{display:grid; gap:14px; margin-top:8px;}
+  .contact-row{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:14px 16px; background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1); border-radius:8px;
+  }
+  .contact-row .k{font-family:var(--mono); font-size:11.5px; color:#8CA0B4; text-transform:uppercase;}
+  .contact-row .v{font-family:var(--mono); font-size:13.5px; color:#fff; text-decoration:none;}
+  .contact-row .v:hover{color:#7FB8FF;}
+
+  footer{
+    padding:28px 0 40px; text-align:center;
+  }
+  footer p{font-family:var(--mono); font-size:11.5px; color:var(--muted);}
+
+  /* responsive */
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .expertise-grid{grid-template-columns:1fr;}
+    .metrics-grid{grid-template-columns:repeat(2,1fr);}
+    .cert-grid{grid-template-columns:1fr;}
+    .contact-panel{grid-template-columns:1fr; padding:30px 24px;}
+    nav.primary-nav{display:none;}
+    .log-entry{grid-template-columns:1fr;}
+    .log-role .period{margin-left:0;}
+  }
+</style>
+</head>
+<body>
+
+<svg class="route-bg" width="100%" height="100%" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M 64 0 L 0 0 0 64" fill="none" stroke="#DCE3E9" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#grid)" opacity="0.5"/>
+</svg>
+
+<header class="topbar">
+  <div class="wrap">
+    <a href="#top" class="brand"><span class="mark">PM</span> pratiksha&nbsp;mane</a>
+    <nav class="primary-nav" aria-label="Primary">
+      <a href="#about">~/about</a>
+      <a href="#expertise">~/stack</a>
+      <a href="#achievements">~/metrics</a>
+      <a href="#experience">~/experience</a>
+      <a href="#certifications">~/certs</a>
+      <a href="#contact">~/contact</a>
+    </nav>
+    <div class="status-pill"><span class="dot" aria-hidden="true"></span>available for engagements</div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">// cloud infrastructure &amp; implementation consultant</span>
+        <h1>Pratiksha Mane builds cloud platforms that <span>stay up.</span></h1>
+        <p class="role">Senior Cloud Infrastructure &amp; Implementation Consultant — AWS, Azure, DevOps automation and Polarion ALM delivery.</p>
+        <p class="desc">Triple AWS-certified, with 5+ years running enterprise-grade AWS &amp; Azure infrastructure at Siemens Digital Industries Software for 150+ clients across Europe and the Americas — with zero project failures along the way.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="mailto:mane.pratiksha@outlook.com">Get in touch</a>
+          <a class="btn btn-ghost" href="#experience">View experience</a>
+        </div>
+        <div class="hero-meta">
+          <div><strong>5+ yrs</strong>enterprise cloud &amp; ALM delivery</div>
+          <div><strong>150+</strong>global clients supported</div>
+          <div><strong>3</strong>AWS certifications</div>
+        </div>
+      </div>
+
+      <div class="status-board" role="img" aria-label="Summary dashboard of Pratiksha's key operating metrics">
+        <div class="status-board-head">
+          <span class="title">infra-status.log</span>
+          <div class="traffic"><span></span><span></span><span></span></div>
+        </div>
+        <div class="status-board-body">
+          <div class="metric-row"><span class="metric-label">sla_adherence</span><span class="metric-value good">100%</span></div>
+          <div class="metric-row"><span class="metric-label">system_uptime</span><span class="metric-value good">99.9%</span></div>
+          <div class="metric-row"><span class="metric-label">project_failures</span><span class="metric-value good">0</span></div>
+          <div class="metric-row"><span class="metric-label">infra_operations</span><span class="metric-value">180+</span></div>
+          <div class="metric-row"><span class="metric-label">manual_effort</span><span class="metric-value good">−60%</span></div>
+          <div class="metric-row"><span class="metric-label">first_call_resolution</span><span class="metric-value">&gt;95%</span></div>
+        </div>
+        <div class="status-board-foot">
+          <span class="dot" aria-hidden="true"></span>
+          <p>last verified against 180+ production operations, Jun 2021 – present</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">01 · about</span>
+        <h2>Cloud delivery with an operator's discipline</h2>
+      </div>
+      <div class="about-body">
+        <p>Pratiksha is a Triple AWS-Certified Lead Cloud Consultant with over five years of enterprise cloud and ALM delivery experience at Siemens Digital Industries Software, serving 150+ global clients across Europe and the Americas. Her work spans AWS and Azure infrastructure operations, automation, and observability — consistently delivered with 100% SLA adherence, 99.9% uptime, and zero project failures across 180+ infrastructure operations.</p>
+        <p>She builds the automation layer that keeps large Polarion ALM environments reliable: Python and Ansible scripts that cut manual effort by 60%, CI/CD pipelines that make deployments repeatable, and monitoring dashboards that shrink incident response time by 40%. She's also an award-winning trainer, having led 45+ global sessions on AWS, Azure, Linux and Polarion.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section id="expertise">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">02 · stack</span>
+        <h2>Areas of expertise</h2>
+        <p class="lede">The platforms, tooling and operating practices Pratiksha works in day to day.</p>
+      </div>
+      <div class="expertise-grid">
+        <div class="expertise-card">
+          <div class="head"><h3>Cloud Platforms &amp; Infrastructure — AWS</h3><span class="idx">aws/</span></div>
+          <div class="tag-list">
+            <span class="tag">EC2</span><span class="tag">S3</span><span class="tag">EBS</span><span class="tag">EFS</span>
+            <span class="tag">ELB</span><span class="tag">Route 53</span><span class="tag">IAM</span><span class="tag">Lambda</span>
+            <span class="tag">CloudFormation</span><span class="tag">CloudWatch</span><span class="tag">EventBridge</span>
+            <span class="tag">SNS/SES</span><span class="tag">Budgets</span>
+          </div>
+        </div>
+        <div class="expertise-card">
+          <div class="head"><h3>Cloud Platforms &amp; Infrastructure — Azure</h3><span class="idx">azure/</span></div>
+          <div class="tag-list">
+            <span class="tag">VMs</span><span class="tag">VNet Peering</span><span class="tag">DNS</span>
+            <span class="tag">Load Balancer</span><span class="tag">NSG</span><span class="tag">VM Backup &amp; Restore</span>
+            <span class="tag">Azure Storage</span><span class="tag">Azure Monitor</span>
+          </div>
+        </div>
+        <div class="expertise-card">
+          <div class="head"><h3>Networking</h3><span class="idx">net/</span></div>
+          <div class="tag-list">
+            <span class="tag">VPC</span><span class="tag">Subnets</span><span class="tag">NACLs</span><span class="tag">Route Tables</span>
+            <span class="tag">VPN</span><span class="tag">Transit Gateway</span><span class="tag">Endpoints</span>
+            <span class="tag">SSL/TLS</span><span class="tag">DNS</span><span class="tag">LDAP</span><span class="tag">SMTP</span>
+          </div>
+        </div>
+        <div class="expertise-card">
+          <div class="head"><h3>Automation, DevOps &amp; Scripting</h3><span class="idx">devops/</span></div>
+          <div class="tag-list">
+            <span class="tag">Python</span><span class="tag">Java</span><span class="tag">AWS CLI</span>
+            <span class="tag">Ansible Automation Platform</span><span class="tag">GitLab CI/CD</span>
+            <span class="tag">Docker</span><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">SVN</span>
+          </div>
+        </div>
+        <div class="expertise-card">
+          <div class="head"><h3>Monitoring &amp; ITSM</h3><span class="idx">ops/</span></div>
+          <div class="tag-list">
+            <span class="tag">Datadog</span><span class="tag">PagerDuty</span><span class="tag">CloudWatch</span>
+            <span class="tag">EventBridge</span><span class="tag">Custom Dashboards</span><span class="tag">ServiceNow</span>
+            <span class="tag">Salesforce (SFDC)</span><span class="tag">Polarion ALM</span><span class="tag">Postman</span>
+            <span class="tag">TAC</span><span class="tag">RCA</span><span class="tag">BCP/DR Planning</span>
+          </div>
+        </div>
+        <div class="expertise-card">
+          <div class="head"><h3>Operating Systems</h3><span class="idx">os/</span></div>
+          <div class="tag-list">
+            <span class="tag">RHEL 7</span><span class="tag">RHEL 8</span><span class="tag">RHEL 9</span>
+            <span class="tag">Linux Administration</span><span class="tag">Windows Server</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section id="achievements">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">03 · metrics</span>
+        <h2>Key achievements</h2>
+        <p class="lede">Outcomes measured across five years of production infrastructure work.</p>
+      </div>
+      <div class="metrics-grid">
+        <div class="metric-tile"><span class="num">150+</span><span class="lbl">global clients — 100% SLA adherence</span></div>
+        <div class="metric-tile"><span class="num">180+</span><span class="lbl">infra operations — 99.9% uptime</span></div>
+        <div class="metric-tile"><span class="num">80%</span><span class="lbl">reliability gain from monitoring &amp; automation</span></div>
+        <div class="metric-tile"><span class="num">60%</span><span class="lbl">less manual effort via 14+ automation scripts</span></div>
+        <div class="metric-tile"><span class="num">40%</span><span class="lbl">faster incident response with live dashboards</span></div>
+        <div class="metric-tile"><span class="num">75+</span><span class="lbl">high-priority incidents, &gt;95% first-call resolution</span></div>
+        <div class="metric-tile"><span class="num">45+</span><span class="lbl">global training sessions delivered</span></div>
+        <div class="metric-tile"><span class="num">0</span><span class="lbl">project failures</span></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">04 · experience</span>
+        <h2>Professional experience</h2>
+      </div>
+      <div class="log">
+        <div class="log-role">
+          <div class="role-head">
+            <h3>Lead Implementation Consultant — Cloud &amp; Polarion Operations</h3>
+            <span class="period">jun 2021 → present</span>
+          </div>
+          <span class="company">Siemens Digital Industries Software · Pune, India</span>
+          <div class="log-entries">
+            <div class="log-entry"><span class="tag-key">delivery</span><p>Delivered AWS &amp; Azure-hosted Polarion solutions to 150+ enterprise clients across Europe and the Americas with 100% SLA adherence and zero project failures.</p></div>
+            <div class="log-entry"><span class="tag-key">aws</span><p>Executed 180+ infrastructure operations (EC2, EBS, EFS, S3, Route 53, ELB, IAM), maintaining 99.9% uptime through zero-downtime migrations, including RHEL 8/9 transitions and multi-node cluster deployments.</p></div>
+            <div class="log-entry"><span class="tag-key">azure</span><p>Automated Polarion installation and upgrade workflows on Azure with Ansible Automation Platform and GitLab CI/CD, with Datadog monitoring across VMs, VNet, NSG, DNS and Azure Monitor.</p></div>
+            <div class="log-entry"><span class="tag-key">automation</span><p>Built 14+ Python/Java scripts for log scraping, diagnostics, health checks and thread dump analysis, cutting manual effort 60% and improving incident response 40%.</p></div>
+            <div class="log-entry"><span class="tag-key">monitoring</span><p>Built 5 real-time observability dashboards combining Datadog, Apache logs and AWS CloudWatch metrics, cutting incident triage time by 40%.</p></div>
+            <div class="log-entry"><span class="tag-key">ci/cd</span><p>Designed CI/CD and infrastructure-as-code pipelines using GitLab CI/CD, Ansible, Lambda and CloudFormation for repeatable, automated deployments.</p></div>
+            <div class="log-entry"><span class="tag-key">architecture</span><p>Architected secure, scalable AWS networking (VPC, Subnets, NACLs, VPN, Transit Gateway) and optimized cost through AWS Budgets and consolidated billing.</p></div>
+            <div class="log-entry"><span class="tag-key">migration</span><p>Led full Polarion cluster upgrades and cross-team data migrations across four teams with zero downtime, directing environment cloning and disaster recovery.</p></div>
+            <div class="log-entry"><span class="tag-key">incidents</span><p>Resolved 75+ high-priority incidents with &gt;95% first-call resolution through proactive alerting and root cause analysis.</p></div>
+            <div class="log-entry"><span class="tag-key">enablement</span><p>Authored KMDB knowledge articles and led 45+ global training sessions on AWS, Azure, Linux and Polarion — awarded for Cloud Automation and Operational Excellence.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section id="certifications">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">05 · certifications</span>
+        <h2>Certifications</h2>
+      </div>
+      <div class="cert-grid">
+        <div class="cert-card"><div class="cert-badge">SA</div><h3>AWS Certified Solutions Architect — Associate</h3></div>
+        <div class="cert-card"><div class="cert-badge">CP</div><h3>AWS Certified Cloud Practitioner</h3></div>
+        <div class="cert-card"><div class="cert-badge">AI</div><h3>AWS Certified AI Practitioner</h3></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section id="education">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">06 · education</span>
+        <h2>Education</h2>
+      </div>
+      <div class="edu-card">
+        <div>
+          <h3>Bachelor of Engineering — Mechanical Engineering</h3>
+          <span class="school">PVG's College of Engineering &amp; Technology (COET), Pune, India</span>
+        </div>
+        <span class="cgpa">CGPA 8.35 / 10.0</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-panel">
+        <div>
+          <span class="eyebrow">// get in touch</span>
+          <h2>Let's talk about your next cloud engagement.</h2>
+          <p class="lede">Open to lead cloud consulting, infrastructure automation and Polarion ALM delivery opportunities.</p>
+        </div>
+        <div class="contact-list">
+          <div class="contact-row"><span class="k">email</span><a class="v" href="mailto:mane.pratiksha@outlook.com">mane.pratiksha@outlook.com</a></div>
+          <div class="contact-row"><span class="k">phone</span><a class="v" href="tel:+919923409718">+91 99234 09718</a></div>
+          <div class="contact-row"><span class="k">location</span><span class="v">Pune, India</span></div>
+          <div class="contact-row"><span class="k">network</span><span class="v">LinkedIn — add link</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© <span id="year"></span> Pratiksha Mane · built with an infrastructure engineer's eye for uptime</p>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
