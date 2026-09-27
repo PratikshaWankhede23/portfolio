@@ -25,6 +25,14 @@
     --azure-soft:#E8EFFE;
     --amber:#B9720F;
     --amber-soft:#FBF0DF;
+    --accent-border:#C7E7DA;
+    --amber-border:#EFD9AE;
+    --contact-bg:#0F1B2D;
+    --contact-text:#EDF2F5;
+    --contact-muted:#AEB9C6;
+    --contact-row-bg:rgba(255,255,255,0.05);
+    --contact-row-border:rgba(255,255,255,0.1);
+    --topbar-bg:rgba(244,246,248,0.86);
     --radius:10px;
     --mono:'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
     --display:'Space Grotesk', 'Inter', sans-serif;
@@ -32,8 +40,37 @@
     --maxw:1120px;
   }
 
+  html[data-theme="dark"]{
+    --bg:#0B1220;
+    --surface:#111B2E;
+    --surface-alt:#17233A;
+    --ink:#E9EEF5;
+    --ink-soft:#C3CCDB;
+    --muted:#8B98AC;
+    --line:#243352;
+    --line-strong:#32436A;
+    --accent:#33C994;
+    --accent-ink:#7FE6BC;
+    --accent-soft:#0F2C24;
+    --azure:#6FA1FF;
+    --azure-soft:#132A4F;
+    --amber:#E4A94A;
+    --amber-soft:#332512;
+    --accent-border:#1F4A3B;
+    --amber-border:#4A3A1E;
+    --contact-bg:#050B16;
+    --contact-text:#EDF2F5;
+    --contact-muted:#96A3B7;
+    --contact-row-bg:rgba(255,255,255,0.04);
+    --contact-row-border:rgba(255,255,255,0.08);
+    --topbar-bg:rgba(11,18,32,0.86);
+  }
+
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
+  body, .btn, .status-pill, .tag, .expertise-card, .cert-card, .edu-card, .log-entry, .metric-tile, .status-board, .topbar{
+    transition:background-color .25s ease, border-color .25s ease, color .25s ease;
+  }
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
     *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
@@ -70,7 +107,7 @@
   /* ---------- top bar ---------- */
   .topbar{
     position:sticky; top:0; z-index:50;
-    background:rgba(244,246,248,0.86);
+    background:var(--topbar-bg);
     backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
   }
@@ -92,7 +129,7 @@
   .status-pill{
     display:flex; align-items:center; gap:7px;
     font-family:var(--mono); font-size:12px; color:var(--accent-ink);
-    background:var(--accent-soft); border:1px solid #C7E7DA;
+    background:var(--accent-soft); border:1px solid var(--accent-border);
     padding:5px 10px 5px 8px; border-radius:100px;
   }
   .dot{
@@ -112,6 +149,27 @@
   }
   nav.primary-nav a:hover{color:var(--ink); background:var(--surface-alt);}
   .nav-toggle{display:none;}
+
+  .topbar-right{display:flex; align-items:center; gap:12px;}
+  .theme-toggle{
+    position:relative;
+    width:52px; height:28px; border-radius:100px;
+    background:var(--surface-alt); border:1px solid var(--line-strong);
+    cursor:pointer; flex:none; padding:0;
+    display:flex; align-items:center;
+  }
+  .theme-toggle .knob{
+    position:absolute; top:2px; left:2px;
+    width:22px; height:22px; border-radius:50%;
+    background:var(--surface); border:1px solid var(--line-strong);
+    display:flex; align-items:center; justify-content:center;
+    font-size:12px; line-height:1;
+    transition:transform .2s ease;
+  }
+  html[data-theme="dark"] .theme-toggle .knob{transform:translateX(24px);}
+  .theme-toggle .icon-sun, .theme-toggle .icon-moon{display:block;}
+  html[data-theme="dark"] .theme-toggle .icon-sun{display:none;}
+  html:not([data-theme="dark"]) .theme-toggle .icon-moon{display:none;}
 
   /* ---------- hero ---------- */
   .hero{position:relative; z-index:1; padding:76px 0 64px;}
@@ -255,7 +313,7 @@
     background:var(--amber-soft); color:var(--amber);
     display:flex; align-items:center; justify-content:center;
     font-family:var(--mono); font-weight:700; font-size:13px;
-    border:1px solid #EFD9AE;
+    border:1px solid var(--amber-border);
   }
   .cert-card h3{font-size:14.5px; font-weight:600; line-height:1.35;}
 
@@ -267,21 +325,21 @@
   }
   .edu-card h3{font-size:17px; font-weight:700;}
   .edu-card .school{font-family:var(--mono); font-size:12.5px; color:var(--muted); margin-top:6px; display:block;}
-  .edu-card .cgpa{font-family:var(--mono); font-size:13px; color:var(--accent-ink); background:var(--accent-soft); padding:6px 12px; border-radius:100px; align-self:center; border:1px solid #C7E7DA;}
+  .edu-card .cgpa{font-family:var(--mono); font-size:13px; color:var(--accent-ink); background:var(--accent-soft); padding:6px 12px; border-radius:100px; align-self:center; border:1px solid var(--accent-border);}
 
   /* contact */
   .contact-panel{
-    background:var(--ink); color:#EDF2F5; border-radius:16px; padding:44px;
+    background:var(--contact-bg); color:var(--contact-text); border-radius:16px; padding:44px;
     display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px;
   }
   .contact-panel h2{color:#fff; font-size:clamp(24px,3vw,30px);}
   .contact-panel .eyebrow{color:#7FB8FF;}
-  .contact-panel p.lede{color:#AEB9C6; margin-top:12px; max-width:44ch;}
+  .contact-panel p.lede{color:var(--contact-muted); margin-top:12px; max-width:44ch;}
   .contact-list{display:grid; gap:14px; margin-top:8px;}
   .contact-row{
     display:flex; justify-content:space-between; align-items:center;
-    padding:14px 16px; background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.1); border-radius:8px;
+    padding:14px 16px; background:var(--contact-row-bg);
+    border:1px solid var(--contact-row-border); border-radius:8px;
   }
   .contact-row .k{font-family:var(--mono); font-size:11.5px; color:#8CA0B4; text-transform:uppercase;}
   .contact-row .v{font-family:var(--mono); font-size:13.5px; color:#fff; text-decoration:none;}
@@ -327,7 +385,12 @@
       <a href="#certifications">~/certs</a>
       <a href="#contact">~/contact</a>
     </nav>
-    <div class="status-pill"><span class="dot" aria-hidden="true"></span>available for engagements</div>
+    <div class="topbar-right">
+      <div class="status-pill"><span class="dot" aria-hidden="true"></span>available for engagements</div>
+      <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" aria-pressed="false">
+        <span class="knob"><span class="icon-sun" aria-hidden="true">☀️</span><span class="icon-moon" aria-hidden="true">🌙</span></span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -342,7 +405,7 @@
         <div class="hero-cta">
           <a class="btn btn-primary" href="mailto:mane.pratiksha@outlook.com">Get in touch</a>
           <a class="btn btn-ghost" href="#experience">View experience</a>
-          <a class="btn btn-ghost" href="resume/Pratiksha_Mane_Resume.pdf" download>Download CV</a>
+          <a class="btn btn-ghost" href="resume/Pratiksha_Mane_Resume.pdf" download>Download resume</a>
         </div>
         <div class="hero-meta">
           <div><strong>5+ yrs</strong>enterprise cloud &amp; ALM delivery</div>
@@ -565,6 +628,38 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  (function(){
+    var root = document.documentElement;
+    var toggle = document.getElementById('themeToggle');
+    var STORAGE_KEY = 'pm-portfolio-theme';
+
+    function applyTheme(theme){
+      if(theme === 'dark'){
+        root.setAttribute('data-theme', 'dark');
+        toggle.setAttribute('aria-pressed', 'true');
+      } else {
+        root.removeAttribute('data-theme');
+        toggle.setAttribute('aria-pressed', 'false');
+      }
+    }
+
+    var saved = null;
+    try { saved = localStorage.getItem(STORAGE_KEY); } catch(e) {}
+
+    if(saved === 'dark' || saved === 'light'){
+      applyTheme(saved);
+    } else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
+      applyTheme('dark');
+    }
+
+    toggle.addEventListener('click', function(){
+      var isDark = root.getAttribute('data-theme') === 'dark';
+      var next = isDark ? 'light' : 'dark';
+      applyTheme(next);
+      try { localStorage.setItem(STORAGE_KEY, next); } catch(e) {}
+    });
+  })();
 </script>
 </body>
 </html>
